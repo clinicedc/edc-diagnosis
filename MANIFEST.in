@@ -1,0 +1,6 @@
+include AUTHORS CHANGES LICENSE VERSION
+include MANIFEST.in
+include *.rst
+include *.txt
+recursive-include edc_dx/templates *
+recursive-include edc_dx/static *
