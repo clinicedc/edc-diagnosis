@@ -1,4 +1,4 @@
 [run]
-include = edc_diagnosis/*
-omit = edc_diagnosis/tests/*,edc_diagnosis/migrations/*
+include = edc_dx/*
+omit = edc_dx/tests/*,edc_dx/migrations/*
 branch = 1

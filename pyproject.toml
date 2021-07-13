@@ -9,10 +9,10 @@ py_version = "35"
 [tool.coverage.run]
 parallel = false
 branch = true
-source = ["edc_diagnosis"]
+source = ["edc_dx"]
 
 [tool.coverage.paths]
-source = ["edc_diagnosis", ".tox/*/site-packages"]
+source = ["edc_dx", ".tox/*/site-packages"]
 
 [tool.coverage.report]
 show_missing = true

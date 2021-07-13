@@ -9,19 +9,19 @@ from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
 
 base_dir = dirname(abspath(__file__))
-app_name = "edc_diagnosis"
+app_name = "edc_dx"
 
 DEFAULT_SETTINGS = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
     ETC_DIR=join(base_dir, app_name, "tests", "etc"),
-    SUBJECT_SCREENING_MODEL=f"edc_diagnosis.subjectscreening",
-    SUBJECT_CONSENT_MODEL=f"edc_diagnosis.subjectconsent",
-    SUBJECT_VISIT_MODEL=f"edc_diagnosis.subjectvisit",
-    SUBJECT_VISIT_MISSED_MODEL=f"edc_diagnosis.subjectvisitmissed",
-    SUBJECT_REQUISITION_MODEL=f"edc_diagnosis.subjectrequisition",
-    LIST_MODEL_APP_LABEL="edc_diagnosis",
+    SUBJECT_SCREENING_MODEL=f"edc_dx.subjectscreening",
+    SUBJECT_CONSENT_MODEL=f"edc_dx.subjectconsent",
+    SUBJECT_VISIT_MODEL=f"edc_dx.subjectvisit",
+    SUBJECT_VISIT_MISSED_MODEL=f"edc_dx.subjectvisitmissed",
+    SUBJECT_REQUISITION_MODEL=f"edc_dx.subjectrequisition",
+    LIST_MODEL_APP_LABEL="edc_dx",
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -50,7 +50,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_timepoint.apps.AppConfig",
         "edc_visit_schedule.apps.AppConfig",
         "edc_visit_tracking.apps.AppConfig",
-        "edc_diagnosis.apps.AppConfig",
+        "edc_dx.apps.AppConfig",
     ],
     RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "test_randomization_list.csv"),
     add_dashboard_middleware=True,

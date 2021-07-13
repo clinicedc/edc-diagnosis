@@ -14,13 +14,13 @@ with open(join(dirname(__file__), "VERSION")) as f:
 os.chdir(normpath(join(abspath(__file__), os.pardir)))
 
 setup(
-    name="edc-diagnosis",
+    name="edc-dx",
     version=VERSION,
     author="Erik van Widenfelt",
     author_email="ew2789@gmail.com",
     packages=find_packages(),
     include_package_data=True,
-    url="https://github.com/clinicedc/edc-diagnosis-review",
+    url="https://github.com/clinicedc/edc-dx-review",
     license="GPL license, see LICENSE",
     description="Classes to manage review of HIV, DM and HTN diagnoses",
     long_description=README,
