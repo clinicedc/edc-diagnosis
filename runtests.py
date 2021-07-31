@@ -6,6 +6,7 @@ from os.path import abspath, dirname, join
 import django
 from django.conf import settings
 from django.test.runner import DiscoverRunner
+from edc_constants.constants import CHOL, DM, HIV, HTN
 from edc_test_utils import DefaultTestSettings
 
 base_dir = dirname(abspath(__file__))
@@ -16,12 +17,20 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     BASE_DIR=base_dir,
     APP_NAME=app_name,
     ETC_DIR=join(base_dir, app_name, "tests", "etc"),
-    SUBJECT_SCREENING_MODEL=f"edc_dx.subjectscreening",
-    SUBJECT_CONSENT_MODEL=f"edc_dx.subjectconsent",
-    SUBJECT_VISIT_MODEL=f"edc_dx.subjectvisit",
-    SUBJECT_VISIT_MISSED_MODEL=f"edc_dx.subjectvisitmissed",
-    SUBJECT_REQUISITION_MODEL=f"edc_dx.subjectrequisition",
+    SUBJECT_SCREENING_MODEL=f"edc_metadata.subjectscreening",
+    SUBJECT_CONSENT_MODEL=f"edc_metadata.subjectconsent",
+    SUBJECT_VISIT_MODEL=f"edc_metadata.subjectvisit",
+    SUBJECT_VISIT_MISSED_MODEL=f"edc_metadata.subjectvisitmissed",
+    SUBJECT_REQUISITION_MODEL=f"edc_metadata.subjectrequisition",
     LIST_MODEL_APP_LABEL="edc_dx",
+    EDC_DX_REVIEW_LIST_MODEL_APP_LABEL="edc_dx_review",
+    EDC_DX_REVIEW_SUBJECT_MODEL_APP_LABEL="edc_dx_review",
+    EDC_DIAGNOSIS_LABELS={
+        HIV: HIV,
+        DM: "Diabetes",
+        HTN: "Hypertension",
+        CHOL: "High Cholesterol",
+    },
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -50,6 +59,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_timepoint.apps.AppConfig",
         "edc_visit_schedule.apps.AppConfig",
         "edc_visit_tracking.apps.AppConfig",
+        "edc_dx_review.apps.AppConfig",
         "edc_dx.apps.AppConfig",
     ],
     RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "test_randomization_list.csv"),
