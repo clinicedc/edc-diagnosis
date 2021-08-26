@@ -25,7 +25,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     LIST_MODEL_APP_LABEL="edc_dx",
     EDC_DX_REVIEW_LIST_MODEL_APP_LABEL="edc_dx_review",
     EDC_DX_REVIEW_SUBJECT_MODEL_APP_LABEL="edc_dx_review",
-    EDC_DIAGNOSIS_LABELS={
+    EDC_DX_LABELS={
         HIV: HIV,
         DM: "Diabetes",
         HTN: "Hypertension",
