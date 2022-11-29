@@ -2,7 +2,7 @@ from django import forms
 from edc_constants.constants import YES
 from edc_form_validators import FormValidator
 
-from .diagnoses import (
+from ..diagnoses import (
     ClinicalReviewBaselineRequired,
     Diagnoses,
     InitialReviewRequired,
@@ -35,7 +35,7 @@ class DiagnosisFormValidatorMixin(FormValidator):
             diagnoses.get_dx(prefix) != YES,
             field_applicable=field_applicable,
             applicable_msg=(
-                f"Patient was not previously diagnosed with {label}. " "Expected YES or NO."
+                f"Patient was not previously diagnosed with {label}. Expected YES or NO."
             ),
             not_applicable_msg=f"Patient was previously diagnosed with {label}.",
         )
@@ -48,7 +48,7 @@ class DiagnosisFormValidatorMixin(FormValidator):
             diagnoses.get_dx(prefix) != YES,
             field_applicable=field_applicable,
             applicable_msg=(
-                f"Patient was previously diagnosed with {label}. " "Expected YES or NO."
+                f"Patient was previously diagnosed with {label}. Expected YES or NO."
             ),
             not_applicable_msg=f"Patient was not previously diagnosed with {label}.",
         )
