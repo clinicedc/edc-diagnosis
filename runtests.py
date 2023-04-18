@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 import logging
-import sys
 from os.path import abspath, dirname, join
 
-import django
-from django.conf import settings
-from django.test.runner import DiscoverRunner
-from edc_constants.constants import CHOL, DM, HIV, HTN
-from edc_test_utils import DefaultTestSettings
+from edc_constants.constants import DM, HIV, HTN
+from edc_test_utils import DefaultTestSettings, func_main
 
 base_dir = dirname(abspath(__file__))
 app_name = "edc_dx"
 
-DEFAULT_SETTINGS = DefaultTestSettings(
+project_settings = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
@@ -23,13 +19,13 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     SUBJECT_VISIT_MISSED_MODEL="edc_metadata.subjectvisitmissed",
     SUBJECT_REQUISITION_MODEL="edc_metadata.subjectrequisition",
     LIST_MODEL_APP_LABEL="edc_dx",
-    EDC_DX_REVIEW_LIST_MODEL_APP_LABEL="edc_dx_review",
-    EDC_DX_REVIEW_SUBJECT_MODEL_APP_LABEL="edc_dx_review",
+    REPORT_DATETIME_FIELD_NAME="report_datetime",
+    EDC_DX_REVIEW_LIST_MODEL_APP_LABEL="dx_app",
+    EDC_DX_REVIEW_APP_LABEL="dx_app",
     EDC_DX_LABELS={
         HIV: HIV,
         DM: "Diabetes",
         HTN: "Hypertension",
-        CHOL: "High Cholesterol",
     },
     INSTALLED_APPS=[
         "django.contrib.admin",
@@ -48,6 +44,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_device.apps.AppConfig",
         "edc_facility.apps.AppConfig",
         "edc_lab.apps.AppConfig",
+        "edc_list_data.apps.AppConfig",
         "edc_metadata.apps.AppConfig",
         "edc_offstudy.apps.AppConfig",
         "edc_reference.apps.AppConfig",
@@ -60,6 +57,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "edc_visit_tracking.apps.AppConfig",
         "edc_dx_review.apps.AppConfig",
         "edc_dx.apps.AppConfig",
+        "dx_app.apps.AppConfig",
     ],
     RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "test_randomization_list.csv"),
     add_dashboard_middleware=True,
@@ -68,12 +66,7 @@ DEFAULT_SETTINGS = DefaultTestSettings(
 
 
 def main():
-    if not settings.configured:
-        settings.configure(**DEFAULT_SETTINGS)
-    django.setup()
-    tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
-    failures = DiscoverRunner(failfast=False, tags=tags).run_tests([f"{app_name}.tests"])
-    sys.exit(failures)
+    func_main(project_settings, f"{app_name}.tests")
 
 
 if __name__ == "__main__":
