@@ -21,6 +21,7 @@ For example:
     )
     ...
 
+
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-dx.svg
     :target: https://pypi.python.org/pypi/edc-dx
 
