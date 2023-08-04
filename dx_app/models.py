@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import PROTECT
-from edc_appointment.models import Appointment
 from edc_crf.model_mixins import SingletonCrfModelMixin
 from edc_dx_review.model_mixins import (
     ClinicalReviewBaselineModelMixin,
@@ -14,17 +13,7 @@ from edc_dx_review.model_mixins.factory import (
 )
 from edc_model.models import BaseUuidModel
 from edc_utils import get_utcnow
-from edc_visit_schedule.model_mixins import VisitScheduleModelMixin
-
-
-class SubjectVisit(VisitScheduleModelMixin, BaseUuidModel):
-    appointment = models.OneToOneField(Appointment, on_delete=PROTECT, related_name="+")
-
-    subject_identifier = models.CharField(max_length=50)
-
-    reason = models.CharField(max_length=25)
-
-    report_datetime = models.DateTimeField(default=get_utcnow)
+from edc_visit_tracking.models import SubjectVisit
 
 
 class ClinicalReviewBaseline(
