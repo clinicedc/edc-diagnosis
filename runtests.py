@@ -19,6 +19,7 @@ project_settings = DefaultTestSettings(
     SUBJECT_VISIT_MISSED_MODEL="edc_metadata.subjectvisitmissed",
     SUBJECT_REQUISITION_MODEL="edc_metadata.subjectrequisition",
     LIST_MODEL_APP_LABEL="edc_dx",
+    EDC_SITES_REGISTER_DEFAULT=True,
     REPORT_DATETIME_FIELD_NAME="report_datetime",
     EDC_DX_REVIEW_LIST_MODEL_APP_LABEL="dx_app",
     EDC_DX_REVIEW_APP_LABEL="dx_app",

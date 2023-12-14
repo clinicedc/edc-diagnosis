@@ -25,8 +25,8 @@ For example:
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-dx.svg
     :target: https://pypi.python.org/pypi/edc-dx
 
-.. |actions| image:: https://github.com/clinicedc/edc-dx/workflows/build/badge.svg?branch=develop
-  :target: https://github.com/clinicedc/edc-dx/actions?query=workflow:build
+.. |actions| image:: https://github.com/clinicedc/edc-dx/actions/workflows/build.yml/badge.svg
+  :target: https://github.com/clinicedc/edc-dx/actions/workflows/build.yml
 
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-dx/branch/develop/graph/badge.svg
   :target: https://codecov.io/gh/clinicedc/edc-dx
