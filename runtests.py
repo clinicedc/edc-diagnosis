@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 import logging
-from os.path import abspath, dirname, join
+from pathlib import Path
 
 from edc_constants.constants import DM, HIV, HTN
 from edc_test_utils import DefaultTestSettings, func_main
 
-base_dir = dirname(abspath(__file__))
 app_name = "edc_dx"
+
+base_dir = Path(__file__).absolute().parent
 
 project_settings = DefaultTestSettings(
     calling_file=__file__,
     BASE_DIR=base_dir,
     APP_NAME=app_name,
-    ETC_DIR=join(base_dir, app_name, "tests", "etc"),
+    ETC_DIR=str(base_dir / app_name / "tests" / "etc"),
     SUBJECT_SCREENING_MODEL="edc_metadata.subjectscreening",
     SUBJECT_CONSENT_MODEL="edc_metadata.subjectconsent",
     SUBJECT_VISIT_MODEL="edc_visit_tracking.subjectvisit",
@@ -59,7 +60,7 @@ project_settings = DefaultTestSettings(
         "edc_dx.apps.AppConfig",
         "dx_app.apps.AppConfig",
     ],
-    RANDOMIZATION_LIST_PATH=join(base_dir, app_name, "tests", "test_randomization_list.csv"),
+    RANDOMIZATION_LIST_PATH=str(base_dir / app_name / "tests" / "test_randomization_list.csv"),
     add_dashboard_middleware=True,
     use_test_urls=True,
 ).settings
