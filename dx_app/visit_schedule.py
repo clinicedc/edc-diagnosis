@@ -3,6 +3,8 @@ from edc_visit_schedule.schedule import Schedule
 from edc_visit_schedule.visit import Crf, FormsCollection, Visit
 from edc_visit_schedule.visit_schedule import VisitSchedule
 
+from dx_app.consents import consent_v1
+
 crfs_day1 = FormsCollection(
     Crf(show_order=1, model="dx_app.ClinicalReviewBaseline", required=True),
     Crf(show_order=10, model="dx_app.HivInitialReview", required=False),
@@ -54,9 +56,9 @@ visit1 = Visit(
 
 schedule = Schedule(
     name="schedule",
-    onschedule_model="edc_metadata.onschedule",
-    offschedule_model="edc_metadata.offschedule",
-    consent_model="edc_metadata.subjectconsent",
+    onschedule_model="dx_app.onschedule",
+    offschedule_model="dx_app.offschedule",
+    consent_definitions=[consent_v1],
     appointment_model="edc_appointment.appointment",
 )
 
@@ -66,7 +68,7 @@ schedule.add_visit(visit1)
 visit_schedule = VisitSchedule(
     name="visit_schedule",
     offstudy_model="edc_offstudy.subjectoffstudy",
-    death_report_model="edc_metadata.deathreport",
+    death_report_model="edc_adverse_event.deathreport",
 )
 
 visit_schedule.add_schedule(schedule)

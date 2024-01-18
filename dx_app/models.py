@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.db.models import PROTECT
 from edc_crf.model_mixins import SingletonCrfModelMixin
@@ -11,9 +13,44 @@ from edc_dx_review.model_mixins.factory import (
     baseline_review_model_mixin_factory,
     followup_review_model_mixin_factory,
 )
+from edc_identifier.managers import SubjectIdentifierManager
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierFieldMixin
 from edc_model.models import BaseUuidModel
+from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
+from edc_screening.model_mixins import ScreeningModelMixin
+from edc_sites.model_mixins import SiteModelMixin
 from edc_utils import get_utcnow
+from edc_visit_schedule.model_mixins import OffScheduleModelMixin, OnScheduleModelMixin
 from edc_visit_tracking.models import SubjectVisit
+
+
+class OnSchedule(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
+    pass
+
+
+class OffSchedule(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
+    pass
+
+
+class SubjectScreening(ScreeningModelMixin, BaseUuidModel):
+    objects = SubjectIdentifierManager()
+
+
+class SubjectConsent(
+    SiteModelMixin,
+    NonUniqueSubjectIdentifierFieldMixin,
+    UpdatesOrCreatesRegistrationModelMixin,
+    BaseUuidModel,
+):
+    consent_datetime = models.DateTimeField(default=get_utcnow)
+
+    version = models.CharField(max_length=25, default="1")
+
+    identity = models.CharField(max_length=25)
+
+    confirm_identity = models.CharField(max_length=25)
+
+    dob = models.DateField(default=date(1995, 1, 1))
 
 
 class ClinicalReviewBaseline(
