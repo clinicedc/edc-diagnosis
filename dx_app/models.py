@@ -23,6 +23,8 @@ from edc_utils import get_utcnow
 from edc_visit_schedule.model_mixins import OffScheduleModelMixin, OnScheduleModelMixin
 from edc_visit_tracking.models import SubjectVisit
 
+from dx_app.consents import consent_v1
+
 
 class OnSchedule(SiteModelMixin, OnScheduleModelMixin, BaseUuidModel):
     pass
@@ -33,6 +35,7 @@ class OffSchedule(SiteModelMixin, OffScheduleModelMixin, BaseUuidModel):
 
 
 class SubjectScreening(ScreeningModelMixin, BaseUuidModel):
+    consent_definition = consent_v1
     objects = SubjectIdentifierManager()
 
 
