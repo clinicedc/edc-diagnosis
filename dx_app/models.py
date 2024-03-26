@@ -2,6 +2,7 @@ from datetime import date
 
 from django.db import models
 from django.db.models import PROTECT
+from edc_consent.managers import ConsentObjectsByCdefManager, CurrentSiteByCdefManager
 from edc_crf.model_mixins import SingletonCrfModelMixin
 from edc_dx_review.model_mixins import (
     ClinicalReviewBaselineModelMixin,
@@ -57,6 +58,9 @@ class SubjectConsent(
 
 
 class SubjectConsentV1(SubjectConsent):
+    objects = ConsentObjectsByCdefManager()
+    on_site = CurrentSiteByCdefManager()
+
     class Meta:
         proxy = True
 
